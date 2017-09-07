@@ -1,2 +1,5 @@
 /Library
 /Temp
+/client.csproj
+/client.Editor.csproj
+/client.sln
