@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace EnterSon.GameStage
@@ -11,7 +12,7 @@ namespace EnterSon.GameStage
 
 		public virtual void InitializeStage()
 		{
-
+			Debug.LogFormat("[GameStage] Initializing <color=blue>{0}</color>...", this.GetType().ToString().Split('.').Last());
 		}
 
 		public virtual void EnterStage()

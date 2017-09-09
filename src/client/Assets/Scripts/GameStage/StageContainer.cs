@@ -32,7 +32,7 @@ namespace EnterSon.GameStage
 		{
 			var allTypesOfStage = (from domainAssembly in AppDomain.CurrentDomain.GetAssemblies()
 								   from assemblyType in domainAssembly.GetTypes()
-								   where typeof(GameStage).IsAssignableFrom(assemblyType)
+								   where assemblyType.IsSubclassOf(typeof(GameStage))
 								   select assemblyType).ToList();
 
 			Action<Type> addStage = (stageType) =>
