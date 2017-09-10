@@ -3,3 +3,5 @@
 /client.csproj
 /client.Editor.csproj
 /client.sln
+/Bin
+/client.Plugins.csproj

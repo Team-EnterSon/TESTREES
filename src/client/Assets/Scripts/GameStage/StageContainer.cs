@@ -59,11 +59,11 @@ namespace EnterSon.GameStage
 
 		private void switchStage(Type nextStageType)
 		{
+			Debug.Assert(nextStageType != null);
 			Debug.Assert(_stages.ContainsKey(nextStageType));
 
 			// NOTE(sorae): current stage can be null when launch
-			if (_currentStage != null)
-				_currentStage.ExitStage();
+			_currentStage?.ExitStage();
 			_currentStage = _stages[nextStageType];
 			_currentStage.EnterStage();
 		}

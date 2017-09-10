@@ -586,7 +586,7 @@ PlayerSettings:
   cloudServicesEnabled:
     UNet: 1
   facebookSdkVersion: 7.9.4
-  apiCompatibilityLevel: 2
+  apiCompatibilityLevel: 3
   cloudProjectId: 3e317266-e4de-4ca7-9378-b85a6c8ed8b2
   projectName: TESTREES
   organizationId: team-third-line-butterfly
