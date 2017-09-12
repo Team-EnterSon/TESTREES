@@ -50,20 +50,23 @@ namespace EnterSon.GameStage
 			switchStage(Type.GetType(_startStageName));
 		}
 
-		public void Update()
+		public IEnumerator Update()
 		{
 			_currentStage.UpdateStage(Time.deltaTime);
 			if (_currentStage.NextStageType != null)
-				switchStage(_currentStage.NextStageType);
+				yield return switchStage(_currentStage.NextStageType);
 		}
 
-		private void switchStage(Type nextStageType)
+		private IEnumerator switchStage(Type nextStageType)
 		{
 			Debug.Assert(nextStageType != null);
 			Debug.Assert(_stages.ContainsKey(nextStageType));
 
 			// NOTE(sorae): current stage can be null when launch
 			_currentStage?.ExitStage();
+
+			yield return null;
+			Resources.UnloadUnusedAssets();
 			_currentStage = _stages[nextStageType];
 			_currentStage.EnterStage();
 		}
