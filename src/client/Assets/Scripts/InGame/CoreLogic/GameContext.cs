@@ -15,10 +15,11 @@ namespace TESTREES.GamePlay
 			var mapPrefab = Resources.Load<GameObject>("InGame/Prefabs/Map");
 			ClientScene.RegisterPrefab(mapPrefab);
 
+			// if server mode
 			if (NetworkServer.active)
 			{
 				// NOTE(sorae): spawn map..
-
+				// TODO(sorae): separate the map spawning impl into separate function
 				var mapObj = Instantiate(mapPrefab);
 				NetworkServer.Spawn(mapObj);
 			}
@@ -42,6 +43,13 @@ namespace TESTREES.GamePlay
 
 
 				return instance;
+			}
+
+			// This function will used for re-connect routine, replay, etc..
+			public static GameContext CreateFromDump(object dump)
+			{
+				// TODO(sorae): impl..
+				throw new NotImplementedException();
 			}
 		}
 	}

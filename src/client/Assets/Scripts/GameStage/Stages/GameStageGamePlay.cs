@@ -55,19 +55,7 @@ namespace TESTREES.GameStages
 		{
 			yield return initializeNetwork();
 			yield return initializeGame();
-		}
-
-		private IEnumerator initializeGame()
-		{
-			Debug.Log("[GameStageGamePlay] Start to initialize Game...");
-
-			var gameCam = GameCamera.Factory.Create();
-			_disposables.Add(gameCam);
-
-			_gameContext = GameContext.Factory.Create(_networkManager);
-			_disposables.Add(_gameContext);
-			yield return _gameContext.InitializeGame();
-			yield break;
+			yield return gameRoutine();
 		}
 
 		private IEnumerator initializeNetwork()
@@ -86,5 +74,45 @@ namespace TESTREES.GameStages
 
 			yield break;
 		}
+
+		private IEnumerator initializeGame()
+		{
+			Debug.Log("[GameStageGamePlay] Start to initialize Game...");
+
+			var gameCam = GameCamera.Factory.Create();
+			_disposables.Add(gameCam);
+
+			_gameContext = GameContext.Factory.Create(_networkManager);
+			_disposables.Add(_gameContext);
+			yield return _gameContext.InitializeGame();
+			yield break;
+		}
+
+		private IEnumerator gameRoutine()
+		{
+			Debug.Log("[GameStageGamePlay] Start game routine...");
+			yield return phaseRoutine_PawnPlacement();
+			// TODO(sorae): Implement effect for batch unit placement completion
+			yield return phaseRoutine_GamePlay();
+		}
+
+		/// <summary>
+		/// Phase for each player to place pawns.
+		/// </summary>
+		private IEnumerator phaseRoutine_PawnPlacement()
+		{
+			yield break;	
+		}
+
+		/// <summary>
+		/// Game play phase
+		/// </summary>
+		/// <returns></returns>
+		private IEnumerator phaseRoutine_GamePlay()
+		{
+			yield break;
+		}
+
+
 	}
 }

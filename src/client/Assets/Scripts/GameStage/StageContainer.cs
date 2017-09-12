@@ -50,25 +50,29 @@ namespace EnterSon.GameStage
 			switchStage(Type.GetType(_startStageName));
 		}
 
-		public IEnumerator Update()
+		public void Update()
 		{
 			_currentStage.UpdateStage(Time.deltaTime);
 			if (_currentStage.NextStageType != null)
-				yield return switchStage(_currentStage.NextStageType);
+				switchStage(_currentStage.NextStageType);
 		}
 
-		private IEnumerator switchStage(Type nextStageType)
+		private void switchStage(Type nextStageType)
 		{
 			Debug.Assert(nextStageType != null);
 			Debug.Assert(_stages.ContainsKey(nextStageType));
 
 			// NOTE(sorae): current stage can be null when launch
 			_currentStage?.ExitStage();
-
-			yield return null;
-			Resources.UnloadUnusedAssets();
 			_currentStage = _stages[nextStageType];
 			_currentStage.EnterStage();
+		}
+
+		private IEnumerator clearMemoryRoutine()
+		{
+			// NOTE(sorae): Delay 1 frame to be assured that references has been cleaned up
+			yield return null;
+			Resources.UnloadUnusedAssets();
 		}
 	}
 }
