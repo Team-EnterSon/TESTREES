@@ -17,4 +17,12 @@ namespace TESTREES.GamePlay
 
 
 	}
+
+	public struct GameCoord
+	{
+		public static readonly GameCoord Zero = new GameCoord { X = 0, Y = 0 };
+
+		public uint X;
+		public uint Y;
+	}
 }

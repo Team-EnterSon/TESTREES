@@ -12,6 +12,8 @@ using UnityEngine.Networking;
 using TESTREES.Networking;
 using EnterSon.Utilities;
 using UniRx;
+using EnterSon.UI;
+using TESTREES.TBD;
 
 namespace TESTREES.GameStages
 {
@@ -22,7 +24,14 @@ namespace TESTREES.GameStages
 
 		private NetworkManager _networkManager = null;
 
-		private HashSet<IDisposable> _disposables = new HashSet<IDisposable>();
+        // NOTE(sorae): All resources used in this stage must register their own disposers here.
+        private CompositeDisposable _disposables = new CompositeDisposable();
+
+		private Player _myPlayer { get; set; } = null;
+
+		private User _myUser { get; set; } = null;
+
+		private InGameBoard _inGameBoard { get; set; } = null;
 
 		public override void InitializeStage()
 		{
@@ -40,7 +49,7 @@ namespace TESTREES.GameStages
 		{
 			base.ExitStage();
 
-			_disposables.ForEach(eachDisposable => eachDisposable.Dispose());
+            _disposables.Dispose();
 			_disposables.Clear();
 
 		}
@@ -101,7 +110,24 @@ namespace TESTREES.GameStages
 		/// </summary>
 		private IEnumerator phaseRoutine_PawnPlacement()
 		{
-			yield break;	
+            // NOTE(sorae): Players need to spawn all pawns in their decks.
+            while(_myPlayer.Pawns.Count == _myUser.Deck.Count)
+			{
+				var pickedPosition = GameCoord.Zero;
+				var pawnTypeToSpawn = null as Type;
+
+				yield return _inGameBoard.WaitForPickSpawningPosition(out pickedPosition, out pawnTypeToSpawn);
+
+				if (false == _gameContext.SpawnPawn(pawnTypeToSpawn, pickedPosition))
+				{
+					Debug.LogWarningFormat("[GameStageGamePlay] Failed to spwan pawn! typeof : {0}", pawnTypeToSpawn);
+					continue;
+				}
+
+
+
+                yield return null;
+            }
 		}
 
 		/// <summary>

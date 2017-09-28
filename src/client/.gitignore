@@ -5,3 +5,5 @@
 /client.sln
 /Bin
 /client.Plugins.csproj
+/Assembly-CSharp*.csproj
+/obj
