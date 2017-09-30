@@ -27,14 +27,14 @@ namespace TESTREES.GamePlay
 			yield break;
 		}
 
-		public bool SpawnPawn<T>(GameCoord @position) where T : Pawn
+		public bool SpawnPawn<T>(GameCoord position) where T : Pawn
 		{
-			return SpawnPawn(typeof(T), @position);
+			return SpawnPawn(typeof(T), position);
 		}
 
-		public bool SpawnPawn(Type @pawnType, GameCoord @position)
+		public bool SpawnPawn(Type pawnType, GameCoord position)
 		{
-			// TODO(sorae): spawn a pawn <@pawnType> to target position
+			// TODO(sorae): spawn a pawn <pawnType> to target position
 
 			return false;
 		}

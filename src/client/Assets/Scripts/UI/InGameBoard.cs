@@ -13,7 +13,7 @@ namespace EnterSon.UI
 
 		}
 
-		public IEnumerator WaitForPickSpawningPosition(out GameCoord @posToSpawn, out Type @pawnTypeToSpawn)
+		public IEnumerator WaitForPickSpawningPosition(out GameCoord posToSpawn, out Type pawnTypeToSpawn)
 		{
 			// TODO(sorae): impl..
 			throw new NotImplementedException();
