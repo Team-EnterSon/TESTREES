@@ -1,0 +1,12 @@
+// Table for Pawns..
+{ // SwordsMan
+  "ID": 1,
+  "NameKey": "PAWN:NAME_SWORDSMAN,
+  "DescriptionKey": null,
+  "HP": 50,
+  "Shield": null,
+  "MoveSpeed": 0.5,
+  "WeaponID": 1, // Sword
+  "MobilityID": 0, // Foot
+  "SkillIDs": null // Has no skills yet
+}
