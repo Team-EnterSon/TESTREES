@@ -1,4 +1,5 @@
 ﻿using EnterSon.GameStage;
+using EnterSon.I18N;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,9 @@ namespace TESTREES.GameStages
 			base.EnterStage();
 
 			initializeUI();
+			I18N.Instance.Initialize(I18N.Language.kEnglish);
+
+			Debug.Log(I18N.Instance["BUTTON:NOK"]);
 		}
 
 		private void initializeUI()
