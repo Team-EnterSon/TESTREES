@@ -8,6 +8,7 @@ namespace TESTREES.TBD
 {
 	public class User
 	{
-		public List<PawnInfo> Deck { get; set; } = null;
+		// List<PawnID>
+		public List<int> Deck { get; set; } = null;
 	}
 }
