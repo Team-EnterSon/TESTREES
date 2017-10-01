@@ -25,7 +25,7 @@ namespace EnterSon.GameStage
 			var stageNames = (from domainAssembly in AppDomain.CurrentDomain.GetAssemblies()
 								   from assemblyType in domainAssembly.GetTypes()
 								   where assemblyType.IsSubclassOf(typeof(GameStage))
-								   select assemblyType.ToString());
+								   select assemblyType.ToString()).ToList();
 
 			var beutifiedStageNames = stageNames.Select(eachName => eachName.Split('.').Last());
 
@@ -34,6 +34,8 @@ namespace EnterSon.GameStage
 				EditorGUILayout.LabelField(fieldName, "There is no class inherits from GameStage.");
 				return;
 			}
+
+			_startStageIndex = stageNames.IndexOf(typeof(StageContainer).GetField("_startStageName", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(target) as string);
 
 			// there are least 1 type of GameStage
 			_startStageIndex = EditorGUILayout.Popup(fieldName, _startStageIndex, beutifiedStageNames.ToArray());
