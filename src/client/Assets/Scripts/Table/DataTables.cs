@@ -27,6 +27,7 @@ namespace TESTREES.Tables
 			if(false == loadedTables.ContainsKey(typeof(T)))
 			{
 				Debug.LogErrorFormat("[DataTables] There is no loaded table for <color=orange>{0}</color>", typeof(T).Name);
+				return null;
 			}
 			return loadedTables[typeof(T)];
 		}

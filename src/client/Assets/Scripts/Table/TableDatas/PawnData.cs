@@ -13,7 +13,6 @@ namespace TESTREES.Tables
 		public int? Shield;
 		// m/s
 		public float MoveSpeed;
-		public bool IsAirUnit;
 		public int WeaponID;
 		public int MobilityID;
 		public List<int> SkillIDs;

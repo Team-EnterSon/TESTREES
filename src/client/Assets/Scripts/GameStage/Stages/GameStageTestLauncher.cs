@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TESTREES.Tables;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -15,13 +16,7 @@ namespace TESTREES.GameStages
 		{
 			base.EnterStage();
 
-			initializeUI();
-		}
-
-		private void initializeUI()
-		{
-			var networkManagerHUD = new GameObject("NetworkHUD");
-			networkManagerHUD.AddComponent<NetworkManagerHUD>();
+			DataTables.LoadTables();
 		}
 	}
 }
