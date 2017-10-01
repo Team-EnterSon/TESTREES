@@ -27,12 +27,7 @@ namespace TESTREES.GamePlay
 			yield break;
 		}
 
-		public bool SpawnPawn<T>(GameCoord position) where T : Pawn
-		{
-			return SpawnPawn(typeof(T), position);
-		}
-
-		public bool SpawnPawn(Type pawnType, GameCoord position)
+		public bool SpawnPawn(int pawnID, GameCoord position)
 		{
 			// TODO(sorae): spawn a pawn <pawnType> to target position
 

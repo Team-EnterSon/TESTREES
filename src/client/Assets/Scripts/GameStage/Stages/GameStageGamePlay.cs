@@ -114,17 +114,15 @@ namespace TESTREES.GameStages
             while(_myPlayer.Pawns.Count == _myUser.Deck.Count)
 			{
 				var pickedPosition = GameCoord.Zero;
-				var pawnTypeToSpawn = null as Type;
+				var pawnIDToSpawn = default(int);
 
-				yield return _inGameBoard.WaitForPickSpawningPosition(out pickedPosition, out pawnTypeToSpawn);
+				yield return _inGameBoard.WaitForPickSpawningPosition(out pickedPosition, out pawnIDToSpawn);
 
-				if (false == _gameContext.SpawnPawn(pawnTypeToSpawn, pickedPosition))
+				if (false == _gameContext.SpawnPawn(pawnIDToSpawn, pickedPosition))
 				{
-					Debug.LogWarningFormat("[GameStageGamePlay] Failed to spwan pawn! typeof : {0}", pawnTypeToSpawn);
+					Debug.LogWarningFormat("[GameStageGamePlay] Failed to spwan pawn! typeof : {0}", pawnIDToSpawn);
 					continue;
 				}
-
-
 
                 yield return null;
             }
