@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace EnterSon.GameStage
+namespace EnterSon.Stage
 {
-	public abstract class GameStage : MonoBehaviour
+	public abstract class Stage : MonoBehaviour
 	{
 		public Type NextStageType { get; private set; } = null;
 
 		public virtual void InitializeStage()
 		{
-			Debug.LogFormat("[GameStage] Initializing <color=blue>{0}</color>...", this.GetType().ToString().Split('.').Last());
+			Debug.LogFormat("[Stage] Initializing <color=blue>{0}</color>...", this.GetType().ToString().Split('.').Last());
 		}
 
 		public virtual void EnterStage()
@@ -30,9 +30,8 @@ namespace EnterSon.GameStage
 
 		}
 
-		protected void setNextStage<TTargetStage>() where TTargetStage : GameStage
-		{
-			NextStageType = typeof(TTargetStage);
-		}
+		protected void setNextStage<TTargetStage>() where TTargetStage : Stage
+			=> NextStageType = typeof(TTargetStage);
+
 	}
 }

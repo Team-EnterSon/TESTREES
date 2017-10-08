@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace EnterSon.I18N
+namespace EnterSon.Internationalization
 {
 	public class I18N
 	{

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TESTREES.GamePlay
+namespace Assets.Scripts.Stage.Stages
 {
-	public interface IInGameObject
+	class StageLobby
 	{
-
 	}
 }

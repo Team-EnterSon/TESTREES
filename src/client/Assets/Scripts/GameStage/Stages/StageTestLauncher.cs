@@ -1,5 +1,5 @@
-﻿using EnterSon.GameStage;
-using EnterSon.I18N;
+﻿using EnterSon.Stage;
+using EnterSon.Internationalization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +9,9 @@ using TESTREES.Tables;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TESTREES.GameStages
+namespace TESTREES.Stages
 {
-	public class GameStageTestLauncher : GameStage
+	public class StageTestLauncher : Stage
 	{
 		public override void EnterStage()
 		{

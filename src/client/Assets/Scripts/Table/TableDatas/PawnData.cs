@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace TESTREES.Tables
 {
@@ -9,6 +10,7 @@ namespace TESTREES.Tables
 		public int ID;
 		public string NameKey;
 		public string DescriptionKey;
+		public string VisualPrefabPath;
 		public int HP;
 		public int? Shield;
 		// m/s
@@ -16,5 +18,8 @@ namespace TESTREES.Tables
 		public int WeaponID;
 		public int MobilityID;
 		public List<int> SkillIDs;
+		[Range(0, 360)]
+		public int SightAngle;
+		public int SightRadius;
 	}
 }
