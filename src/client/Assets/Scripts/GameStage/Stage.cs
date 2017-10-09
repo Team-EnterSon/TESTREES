@@ -13,15 +13,18 @@ namespace EnterSon.Stage
 		public virtual void InitializeStage()
 		{
 			Debug.LogFormat("[Stage] Initializing <color=blue>{0}</color>...", this.GetType().ToString().Split('.').Last());
+
 		}
 
 		public virtual void EnterStage()
 		{
-			
+			Debug.LogFormat("[Stage] Enter stage - <color=blue>{0}</color>...", this.GetType().ToString().Split('.').Last());
+
 		}
 
 		public virtual void ExitStage()
 		{
+			Debug.LogFormat("[Stage] Exit stage - <color=red>{0}</color>...", this.GetType().ToString().Split('.').Last());
 
 		}
 
@@ -31,7 +34,9 @@ namespace EnterSon.Stage
 		}
 
 		protected void setNextStage<TTargetStage>() where TTargetStage : Stage
-			=> NextStageType = typeof(TTargetStage);
-
+		{
+			Debug.LogFormat("[Stage] Set next stage to <color=blue>{0}</color>", typeof(TTargetStage).ToString().Split('.').Last());
+			NextStageType = typeof(TTargetStage);
+		}
 	}
 }
