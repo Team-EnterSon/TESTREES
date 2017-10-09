@@ -41,7 +41,12 @@ namespace TESTREES.Stages
 
 		private IEnumerator serverRoutine()
 		{
-			throw new NotImplementedException();
+			if(NetworkServer.Listen(8965))
+				Debug.Log("NetworkServer activated");
+			else
+				Debug.LogError("Cannot start NetworkServer");
+
+			yield break;
 		}
 
 		public override void ExitStage()
@@ -60,7 +65,23 @@ namespace TESTREES.Stages
 
 		private IEnumerator clientRoutine()
 		{
-			throw new NotImplementedException();
+			setupUI();
+			yield return connectToServerRoutine();
+		}
+
+		private IEnumerator connectToServerRoutine()
+		{
+			var client = new NetworkClient();
+			Debug.LogFormat("Trying to connect at <color=blue>{0}</color>", StageGamePlay.ServerAddress);
+			client.RegisterHandler(MsgType.Connect, (_) => Debug.Log("Connected!"));
+			client.Connect(StageGamePlay.ServerAddress, 8965);
+
+			yield break;
+		}
+
+		private void setupUI()
+		{
+			
 		}
 	}
 }
