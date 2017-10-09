@@ -26,8 +26,12 @@ namespace EnterSon.UI
 
 		public static void Attach(UIBoard board)
 		{
+			var rt = board.transform as RectTransform;
 			board.transform.SetParent(UICanvas.transform);
-			board.transform.localScale = Vector3.one;
+			rt.anchorMin = Vector2.zero;
+			rt.anchorMax = Vector2.one;
+			rt.sizeDelta = Vector2.zero;
+			rt.localScale = Vector3.one;
 		}
 	}
 }

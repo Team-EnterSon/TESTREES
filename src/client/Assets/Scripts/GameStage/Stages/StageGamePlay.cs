@@ -48,8 +48,7 @@ namespace TESTREES.Stages
 		{
 			base.ExitStage();
 
-			_disposables.Dispose();
-			_disposables.Clear();
+			_disposables?.Dispose();
 
 		}
 

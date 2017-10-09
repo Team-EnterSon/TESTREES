@@ -53,17 +53,17 @@ namespace EnterSon.Stage
 			this.Stages.ForEach(eachStage => eachStage.InitializeStage());
 
 			// TODO(sorae): start with launcher stage
-			switchStage(Type.GetType(_startStageName));
+			StartCoroutine(switchStage(Type.GetType(_startStageName)));
 		}
 
 		public void Update()
 		{
 			_currentStage.UpdateStage(Time.deltaTime);
 			if (_currentStage.NextStageType != null)
-				switchStage(_currentStage.NextStageType);
+				StartCoroutine(switchStage(_currentStage.NextStageType));
 		}
 
-		private void switchStage(Type nextStageType)
+		private IEnumerator switchStage(Type nextStageType)
 		{
 			Debug.Assert(nextStageType != null);
 			Debug.Assert(_stages.ContainsKey(nextStageType));
@@ -71,7 +71,11 @@ namespace EnterSon.Stage
 			// NOTE(sorae): current stage can be null when launch
 			_currentStage?.ExitStage();
 			_currentStage = _stages[nextStageType];
+			yield return null;
 			_currentStage.EnterStage();
+			yield return null;
+
+			yield return clearMemoryRoutine();
 		}
 
 		private IEnumerator clearMemoryRoutine()
