@@ -8,18 +8,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TESTREES.Tables;
+using UniRx;
 using UnityEngine;
 
 namespace TESTREES.Stages
 {
 	public class StageLaunch : Stage
 	{
+		private CompositeDisposable _disposables = new CompositeDisposable();
+
 		public override void EnterStage()
 		{
 			base.EnterStage();
 
 			var mainRoutine = App.IsBatchMode ? serverRoutine() : clientRoutine();
 			StartCoroutine(mainRoutine);
+		}
+
+		public override void ExitStage()
+		{
+			base.ExitStage();
+
+			_disposables?.Dispose();
 		}
 
 		private IEnumerator serverRoutine()
@@ -31,6 +41,7 @@ namespace TESTREES.Stages
 
 		private IEnumerator clientRoutine()
 		{
+			setupUI();
 			yield return patchRoutine();
 			yield return afterPatchRoutine();
 			setNextStage<StageLogin>();
@@ -48,6 +59,11 @@ namespace TESTREES.Stages
 			I18N.Instance.Initialize(I18N.Language.kEnglish);
 
 			yield return null;
+		}
+
+		private void setupUI()
+		{
+			
 		}
 	}
 }
