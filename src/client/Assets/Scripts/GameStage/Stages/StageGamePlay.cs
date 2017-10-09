@@ -20,15 +20,19 @@ namespace TESTREES.Stages
 	public class StageGamePlay : Stage
 	{
 		public static string ServerAddress { get; set; } = "127.0.0.1";
+		private const int PORT_NUMBER = 8962;
 
 		// NOTE(sorae): All resources used in this stage must register their own disposers here.
 		private CompositeDisposable _disposables = new CompositeDisposable();
 
 		private InGameBoard _inGameBoard { get; set; } = null;
 
+		private GameContext _gameContext { get; set; } = null;
+
 		public override void InitializeStage()
 		{
 			base.InitializeStage();
+
 		}
 
 		public override void EnterStage()
@@ -41,10 +45,16 @@ namespace TESTREES.Stages
 
 		private IEnumerator serverRoutine()
 		{
-			if(NetworkServer.Listen(8965))
+			if (NetworkServer.Listen(StageGamePlay.PORT_NUMBER))
 				Debug.Log("NetworkServer activated");
 			else
+			{
 				Debug.LogError("Cannot start NetworkServer");
+				yield break;
+			}
+
+// 			_gameContext = new GameObject("GameContext").AddComponent<GameContext>();
+// 			NetworkServer.Spawn(_gameContext);
 
 			yield break;
 		}
@@ -66,15 +76,35 @@ namespace TESTREES.Stages
 		private IEnumerator clientRoutine()
 		{
 			setupUI();
-			yield return connectToServerRoutine();
+			yield return connectToServer();
+
+			yield return placePawns();
+			yield return playGame();
+
 		}
 
-		private IEnumerator connectToServerRoutine()
+		private IEnumerator connectToServer()
 		{
 			var client = new NetworkClient();
 			Debug.LogFormat("Trying to connect at <color=blue>{0}</color>", StageGamePlay.ServerAddress);
-			client.RegisterHandler(MsgType.Connect, (_) => Debug.Log("Connected!"));
-			client.Connect(StageGamePlay.ServerAddress, 8965);
+			client.RegisterHandler(MsgType.Connect, (_) => registerAllSpawnablePrefabs());
+			client.Connect(StageGamePlay.ServerAddress, StageGamePlay.PORT_NUMBER);
+
+			while (false == client.isConnected)
+				yield return null;
+			
+			Debug.LogFormat("[{0}] Connected to server!", nameof(StageGamePlay));
+		}
+
+		private IEnumerator placePawns()
+		{
+			
+
+			yield break;
+		}
+
+		private IEnumerator playGame()
+		{
 
 			yield break;
 		}
@@ -82,6 +112,26 @@ namespace TESTREES.Stages
 		private void setupUI()
 		{
 			
+		}
+
+		private void registerAllSpawnablePrefabs()
+		{
+			// FIXME(sorae): remove path literals 
+			var prefabPaths = new string[]
+			{
+					"InGame/Prefabs/Map",
+					"InGame/Prefabs/Pawn",
+
+			};
+
+			foreach(var eachPath in prefabPaths)
+			{
+				var prefab = Resources.Load<GameObject>(eachPath);
+				if (prefab != null)
+					ClientScene.RegisterPrefab(prefab);
+				else
+					Debug.LogWarningFormat("[{0}] Cannot load prefab - <color=red>{1}</color>", nameof(StageGamePlay), eachPath);
+			}
 		}
 	}
 }
