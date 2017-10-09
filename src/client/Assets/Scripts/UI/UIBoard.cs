@@ -9,7 +9,7 @@ namespace EnterSon.UI
 	{
 		public virtual void Dispose()
 		{
-
+			Destroy(gameObject);
 		}
 	}
 }

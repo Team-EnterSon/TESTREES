@@ -1,6 +1,7 @@
 ﻿using EnterSon;
 using EnterSon.Internationalization;
 using EnterSon.Stage;
+using EnterSon.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -50,7 +51,7 @@ namespace TESTREES.Stages
 		private IEnumerator patchRoutine()
 		{
 			// TODO(sorae): impl..
-			yield return new WaitForSeconds(1.0f);
+			yield return new WaitForSeconds(2.25f);
 		}
 
 		private IEnumerator afterPatchRoutine()
@@ -63,7 +64,11 @@ namespace TESTREES.Stages
 
 		private void setupUI()
 		{
-			
+			var launcherBoard = Instantiate(Resources.Load<UIBoard>("UIBoards/LauncherBoard"));
+			CanvasController.Attach(launcherBoard);
+			_disposables.Add(launcherBoard);
+
+
 		}
 	}
 }
